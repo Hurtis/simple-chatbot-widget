@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="formSubmited()">
     <input
-      class="textarea"
+      class="chatbot-input"
       v-model="myText"
       :type="settings.type"
       :placeholder="settings.placeholder"

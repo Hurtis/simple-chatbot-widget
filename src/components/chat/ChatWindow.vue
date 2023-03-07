@@ -27,6 +27,10 @@
             />
           </li>
         </ul>
+        <SuggestButtons
+          :buttons="data.buttons"
+          @sendChoice="createUserMessage($event)"
+        />
       </div>
       <chatForm
         @formSent="createUserMessage($event)"
@@ -41,13 +45,15 @@
 import ChatMessage from "@/components/chat/ChatMessage.vue";
 import ChatForm from "@/components/chat/ChatForm.vue";
 import CloseIcon from "@/components/icons/CloseIcon.vue";
-import { reactive, ref } from "vue";
+import SuggestButtons from "@/components/chat/SuggestButtons.vue";
+import { reactive, ref, onMounted } from "vue";
 const parent = ref(null);
 const child = ref(null);
 const data = reactive({
-  messages: [{ text: "Ahoj človek.:: Napíš mi niečo.", direction: "bot" }],
+  messages: [],
   typing: false,
-  form: { placeholder: "Napíš správu ...", type: "text" },
+  buttons: [],
+  form: null,
 });
 const errorMsg = {
   text: "Niečo sa pokazilo.:: Skús mi napísať neskôr.",
@@ -69,6 +75,7 @@ function createBotMessage(botMessage) {
     text: botMessage.text,
     direction: "bot",
   });
+  data.buttons = botMessage.buttons;
   data.form = botMessage.form;
   data.typing = false;
   scrollToBottom();
@@ -103,5 +110,8 @@ function fetchData(myData) {
 function scrollToBottom() {
   parent.value.scrollTop = child.value.scrollHeight;
 }
+onMounted(() => {
+  fetchData("start");
+});
 </script>
 
