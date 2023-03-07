@@ -66,7 +66,7 @@
 }
 .chat li.user .msg {
   border-top-right-radius: 2px;
-  background: #4a9ba9;
+  background: #3e8ed0;
   color: #fff;
 }
 .chat li.bot .msg {
@@ -168,6 +168,13 @@ input::-webkit-outer-spin-button {
   margin: 0;
   font-size: 14px;
 }
+.chatbot-window-header .close {
+  background-color: transparent;
+  border: none;
+  padding: 0 3px 3px 3px;
+  color: #fff;
+  cursor: pointer;
+}
 .chatbot-window-body {
   height: 400px;
   overflow: scroll;
@@ -181,8 +188,22 @@ input::-webkit-outer-spin-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #4a9ba9;
+
   box-shadow: 0 10px 18px rgb(0 0 0 / 0.1);
   border-radius: 50%;
   color: #fff;
+  cursor: pointer;
+  background-color: #3e8ed0;
+
+}
+.chatbot-widget:hover {
+  background-color: #52a3e6;
+}
+.chatbot-widget.open{
+  border: 1px solid #ccc;
+  background-color:#ccc;
+  color: #666;
+}
+.chatbot-widget.open:hover {
+  background-color:#e2e2e2;
 }

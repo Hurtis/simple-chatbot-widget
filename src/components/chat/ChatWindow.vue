@@ -2,7 +2,9 @@
   <div class="chatbot-window">
     <div class="chatbot-window-header">
       <h3>Chatbot</h3>
-      <CloseIcon />
+      <button class="close" @click="$emit('closeWindow')">
+        <CloseIcon />
+      </button>
     </div>
     <div ref="parent" class="chatbot-window-body">
       <div class="panel" ref="child">
