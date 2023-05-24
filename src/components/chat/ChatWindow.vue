@@ -43,13 +43,12 @@
 
 <script setup>
 import ChatMessage from "@/components/chat/ChatMessage.vue";
-import ChatForm from "@/components/chat/ChatForm.vue";
 import CloseIcon from "@/components/icons/CloseIcon.vue";
 import SuggestButtons from "@/components/chat/SuggestButtons.vue";
-import { reactive, ref, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 const parent = ref(null);
 const child = ref(null);
-const data = reactive({
+const data = ref({
   messages: [],
   typing: false,
   buttons: [],
@@ -62,22 +61,21 @@ const errorMsg = {
 const url = "https://robot.hurtis.sk";
 
 function createUserMessage(userMessage) {
-  data.messages.push({
+  data.value.messages.push({
     text: userMessage,
     direction: "user",
   });
-
   fetchData(userMessage);
 }
 
 function createBotMessage(botMessage) {
-  data.messages.push({
+  data.value.messages.push({
     text: botMessage.text,
     direction: "bot",
   });
-  data.buttons = botMessage.buttons;
-  data.form = botMessage.form;
-  data.typing = false;
+  data.value.buttons = botMessage.buttons;
+  data.value.form = botMessage.form;
+  data.value.typing = false;
   scrollToBottom();
 }
 
@@ -88,9 +86,12 @@ function unifieString(myString) {
 }
 
 function fetchData(myData) {
-  data.typing = true;
-  let customerText = unifieString(myData);
-  let question = { question: customerText, conversation: data.conversation };
+  data.value.typing = true;
+  const customerText = unifieString(myData);
+  const question = {
+    question: customerText,
+    conversation: data.value.conversation,
+  };
   fetch(url, {
     method: "POST",
     body: JSON.stringify(question),
@@ -114,4 +115,3 @@ onMounted(() => {
   fetchData("start");
 });
 </script>
-

@@ -14,6 +14,5 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
 const { message } = defineProps(["message"]);
 </script>
